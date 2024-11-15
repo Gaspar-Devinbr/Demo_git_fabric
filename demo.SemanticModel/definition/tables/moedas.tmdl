@@ -3,6 +3,7 @@ table moedas
 
 	column Moeda
 		dataType: string
+		displayFolder: Colunas
 		lineageTag: fbfe5f3e-ca2f-4ff3-bda2-093e6f8817b9
 		summarizeBy: none
 		sourceColumn: Moeda
@@ -11,6 +12,7 @@ table moedas
 
 	column Nome
 		dataType: string
+		displayFolder: Colunas
 		lineageTag: 4caf45dd-aaa3-4c21-a2e7-7084b1cf3e89
 		summarizeBy: none
 		sourceColumn: Nome
@@ -19,6 +21,7 @@ table moedas
 
 	column Formato
 		dataType: string
+		displayFolder: Colunas
 		lineageTag: 5837a472-bb3f-4f9e-8439-ba77f005f957
 		summarizeBy: none
 		sourceColumn: Formato
