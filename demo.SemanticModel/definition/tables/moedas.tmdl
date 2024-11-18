@@ -1,0 +1,68 @@
+table moedas
+	lineageTag: 89b261f4-531c-4281-b55c-47ca4334c787
+
+	column Moeda
+		dataType: string
+		displayFolder: Colunas
+		lineageTag: fbfe5f3e-ca2f-4ff3-bda2-093e6f8817b9
+		summarizeBy: none
+		sourceColumn: Moeda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome
+		dataType: string
+		displayFolder: Colunas
+		lineageTag: 4caf45dd-aaa3-4c21-a2e7-7084b1cf3e89
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Formato
+		dataType: string
+		displayFolder: Colunas
+		lineageTag: 5837a472-bb3f-4f9e-8439-ba77f005f957
+		summarizeBy: none
+		sourceColumn: Formato
+
+		annotation SummarizationSetBy = Automatic
+
+	partition moedas = m
+		mode: import
+		queryGroup: Dimensões
+		source = ```
+				let
+				    source = Table.FromRows(
+				        {
+				            {"BRL", "Real brasileiro", "R$ #,##0.00;R$ #,##0.00;-"},
+				            {"AUD", "Dólar australiano", "$ #,##0.00;$ #,##0.00;-"},
+				            {"CAD", "Dólar canadense", "$ #,##0.00;$ #,##0.00;-"},
+				            {"CHF", "Franco suíço", "Fr #,##0.00;Fr #,##0.00;-"},
+				            {"DKK", "Coroa dinamarquesa", "kr #,##0.00;kr #,##0.00;-"},
+				            {"EUR", "Euro", "€ #,##0.00;€ #,##0.00;-"},
+				            {"GBP", "Libra Esterlina", "£ #,##0.00;£ #,##0.00;-"},
+				            {"JPY", "Iene", "¥ #,##0;¥ #,##0;-"},
+				            {"NOK", "Coroa norueguesa", "kr #,##0.00;kr #,##0.00;-"},
+				            {"SEK", "Coroa sueca", "kr #,##0.00;kr #,##0.00;-"},
+				            {"USD", "Dólar dos Estados Unidos", "$ #,##0.00;$ #,##0.00;-"}
+				        },
+				        {"Moeda", "Nome", "Formato"}
+				    ),
+				    
+				    changedType = Table.TransformColumnTypes(
+				        source,{
+				            {"Moeda", type text}, 
+				            {"Nome", type text}, 
+				            {"Formato", type text}
+				        }
+				    )
+				
+				in
+				    changedType
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
